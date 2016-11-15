@@ -33,6 +33,20 @@ class Recurso(models.Model):
 	nome = models.CharField(max_length=250, default='Nome do recurso...')
 	departamento = models.IntegerField(choices=departamentos_enum, default=1)
 	status = models.IntegerField(choices=status_enum, default=1)
+	def criar():
+		pass
+	def listar(codigo):
+		pass
+	def desativar(codigo):
+		pass
+	def registrarDevolucao(codigo):
+		pass
+	def registrarAtraso(codigo):
+		pass
+	def registrarManutencao(codigo):
+		pass
+	def trocarStatus(codigo):
+		pass
 	def __str__(self):
 		return self.nome
 
@@ -41,5 +55,12 @@ class Agendamento(models.Model):
 	responsavel = models.ForeignKey('Funcionario', on_delete=models.CASCADE, null=True)
 	data_inicial = models.DateTimeField(auto_now=False)
 	data_final = models.DateTimeField(auto_now=False)
+	ativo = models.BooleanField(default=True)
+	def criar():
+		pass
+	def cancelar():
+		pass
+	def listar():
+		pass
 	"""def __str__(self):
 		return self.recurso + ' - ' + self.data_inicial + ' ate ' + self.data_final + ' - ' + self.responsavel"""
