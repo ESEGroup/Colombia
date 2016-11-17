@@ -4,12 +4,12 @@ Time: Colombia
 
 
 
-Kanban 
+# Kanban 
 https://waffle.io/alicesouto/UtilizaUFRJ/join 
 
 
 
-Pacotes necessários
+# Pacotes necessários
 
 Python 
 
@@ -17,7 +17,7 @@ Django
 
 
 
-Inicialização 
+# Inicialização 
 
 No terminal, digite o comando 
 
