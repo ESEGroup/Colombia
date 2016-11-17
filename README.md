@@ -2,14 +2,23 @@
 Sistema 2: Agendamento de Recursos  
 Time: Colombia 
 
+
+
 Kanban 
 https://waffle.io/alicesouto/UtilizaUFRJ/join 
 
-Pacotes necessários 
+
+
+Pacotes necessários
+
 Python 
+
 Django 
 
+
+
 Inicialização 
+
 No terminal, digite o comando 
 
       python manage.py runserver
