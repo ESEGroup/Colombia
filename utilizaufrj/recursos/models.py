@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+import uuid
+
 departamentos_enum = (
 	(1, 'DEL'),
 	(2, 'Mecanica'),
@@ -31,6 +33,7 @@ class ChefeDeDepartamento(Usuario):
 class Recurso(models.Model):
 	"""Classe recurso, contendo todos os atributos de um recurso isolado"""
 	nome = models.CharField(max_length=250, default='Nome do recurso...')
+	referencia = models.CharField(max_length=50, default='Identificador unico do recurso', unique=True)
 	departamento = models.IntegerField(choices=departamentos_enum, default=1)
 	status = models.IntegerField(choices=status_enum, default=1)
 	def criar():
@@ -56,11 +59,14 @@ class Agendamento(models.Model):
 	data_inicial = models.DateTimeField(auto_now=False)
 	data_final = models.DateTimeField(auto_now=False)
 	ativo = models.BooleanField(default=True)
+	referencia = models.CharField(max_length=8, default=str(uuid.uuid4())[:8], editable = False)
 	def criar():
 		pass
+	def geraID():
+		return recurso.referencia + str(data_inicial)
 	def cancelar():
 		pass
 	def listar():
 		pass
-	"""def __str__(self):
-		return self.recurso + ' - ' + self.data_inicial + ' ate ' + self.data_final + ' - ' + self.responsavel"""
+	def __str__(self):
+		return str(self.referencia)
