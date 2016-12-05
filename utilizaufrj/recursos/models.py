@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.core.exceptions import ValidationError
 import uuid
 
 departamentos_enum = (
@@ -70,3 +70,7 @@ class Agendamento(models.Model):
 		pass
 	def __str__(self):
 		return str(self.referencia)
+	def save(self, *args, **kwargs):
+		if Agendamento.objects.filter(data_inicial__lte=self.data_inicial, data_final__gte=self.data_final, recurso=self.recurso).exists():
+			raise ValidationError("Recurso indisponivel no periodo solicitado.")
+		super(Agendamento, self).save(*args, **kwargs)
