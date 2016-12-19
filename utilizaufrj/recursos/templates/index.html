@@ -17,37 +17,23 @@
     </head>
     <body>
     <!--barra de navegação-->
-	    <nav class="nav has-shadow">
-       		<div class="nav-left">
-        		<a href='/' class="nave-item is.brand">
-          			<img src="./static/ufrj.png" alt="logo" width="110" />
-        		</a>
-     		</div>
-      		<div class="nav-right nav-item">
-      			<p><a href="{% url 'criar_agendamento' %}">Criar Agendamento</a></p>
-      			<p><a href="{% url 'consultar_agendamento' %}">Consultar Agendamento</p>
-        		<button class="button is-primary" @click="logout()">Sair</button>
-      		</div>
+		<nav class="nav has-shadow">
+			<div class="nav-left">
+				<a href='/' class="nave-item is.brand">
+					<img src="./static/ufrj.png" alt="logo" width="110" />
+				</a>
+			</div>
+			<div class="nav-right nav-item">
+				<p><a href="{% url 'criar_agendamento' %}">Criar Agendamento</a></p>
+				<p><a href="{% url 'consultar_agendamento' %}">Consultar Agendamento</p>
+				<button class="button is-primary" @click="logout()">Sair</button>
+			</div>
     	</nav>
 
     	<div class="container" id="content">
             {% block content %}
             {% endblock %}
 		</div>
-
-	<script>
-	  export default {
-	    props: {
-	      show: Boolean
-	    },
-
-	    methods: {
-	      logout () {
-	        this.$store.dispatch('logout')
-	      }
-	    }
-	  }
-	</script>
 
 	<style lang="scss" scoped>
 	  .nav {
