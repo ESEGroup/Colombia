@@ -1,0 +1,15 @@
+<style lang="scss">
+	$primary: #6CB94A;
+
+	@import '~bulma';
+	@import '~wysiwyg.css/wysiwyg.sass';
+
+	.html {
+	  background-color: #EEEEEE;
+	}
+
+	body{
+	  font-family: "Open Sans";
+	  font-weight: 600;
+	}
+</style>

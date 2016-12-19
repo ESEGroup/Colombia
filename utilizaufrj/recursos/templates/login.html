@@ -1,0 +1,130 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+  <div class="columns">
+    <div class="column is-one-quarter is-hidden-mobile"></div>
+    <div class="column is-half-desktop is-offset-one-mobile">
+      <div class="box">
+        <figure class="image is-128x128 centered">
+          <img src="../components/assets/flip_logo.png" alt="FLIP logo"/>
+        </figure>
+        <div v-if="errors.any()">
+          <div v-if="errors.has('email')" class="tag is-danger">
+            <p>{{ errors.first('email') }}</p>
+          </div>
+          <div v-if="errors.has('password')" class="tag is-danger">
+            <p>{{ errors.first('password') }}</p>
+          </div>
+        </div>
+        <div v-else-if="authError" class="tag is-danger">
+          <p>{{ authError }}</p>
+        </div>
+        <div>
+          <p class="control">
+            <input
+              name="user"
+              class="input is-fullwidth"
+              type="text"
+              placeholder="Cadastro na UFRJ"
+              v-model="credentials.username"
+              required
+              @keyup.enter="submit()"
+            >
+          </p>
+        </div>
+        <div>
+          <p class="control"
+            <input
+              name="password"
+              class="input is-fullwidth"
+              type="password"
+              placeholder="Senha"
+              v-model="credentials.password"
+              required
+              @keyup.enter="submit()"
+            >
+          </p>
+        </div>
+        <button class="button is-medium is-primary is-fullwidth" @click="submit()">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+<script>
+  import { mapGetters } from 'vuex'
+  import Vue from 'vue'
+  import VeeValidate from 'vee-validate'
+
+  const config = {
+    errorBagName: 'errors',
+    locale: 'pt',
+    dictionary: {
+      pt: {
+        messages: {
+          required: (field) => 'Digite seu ' + field,
+          email: () => 'Digite um email válido'
+        },
+        attributes: {
+          email: 'email',
+          password: 'senha'
+        }
+      }
+    }
+  }
+
+  export default {
+    data () {
+      return {
+        credentials: {
+          username: '',
+          password: ''
+        }
+      }
+    },
+
+    computed: mapGetters({
+      authError: 'authenticationErrors'
+    }),
+
+    methods: {
+      submit () {
+        var credentials = {
+          username: this.credentials.username,
+          password: this.credentials.password
+        }
+        if (!this.errors.any()) {
+          this.$store.dispatch('login', credentials)
+        }
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .centered {
+    margin: 0 auto;
+  }
+
+  .box {
+    margin: 25% 25%;
+    display: block;
+    padding: 15px;
+    min-width: 350px;
+    min-height: 250px;
+  }
+
+  .input {
+    padding: 20px;
+    margin-bottom: 3%;
+  }
+
+  .image {
+    margin-bottom: -10%;
+  }
+
+  .tag {
+    margin: 1%;
+  }
+</style>        

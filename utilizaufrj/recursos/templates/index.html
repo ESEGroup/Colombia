@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %} Utiliza UFRJ {% endblock %}
+        </title>
+
+        <link rel="stylesheet" href="{% static "static/index.css" %}">
+        {% render_block css postprocessor "compressor.contrib.sekizai.compress" %}
+        {% block css %}
+        {% endblock %}
+
+        {% block js %}
+        {% endblock %}
+    </head>
+    <body>
+    <!--barra de navegação-->
+	    <nav class="nav has-shadow">
+       		<div class="nav-left">
+        		<a href='/' class="nave-item is.brand">
+          			<img src="./static/ufrj.png" alt="logo" width="110" />
+        		</a>
+     		</div>
+      		<div class="nav-right nav-item">
+      			<p><a href="{% url 'criar_agendamento' %}">Criar Agendamento</a></p>
+      			<p><a href="{% url 'consultar_agendamento' %}">Consultar Agendamento</p>
+        		<button class="button is-primary" @click="logout()">Sair</button>
+      		</div>
+    	</nav>
+
+    	<div class="container" id="content">
+            {% block content %}
+            {% endblock %}
+		</div>
+
+	<script>
+	  export default {
+	    props: {
+	      show: Boolean
+	    },
+
+	    methods: {
+	      logout () {
+	        this.$store.dispatch('logout')
+	      }
+	    }
+	  }
+	</script>
+
+	<style lang="scss" scoped>
+	  .nav {
+	    position: fixed;
+	    width: 100%;
+	  }
+
+	  img {
+	    margin: 10px 25px;
+	    display: inline-block;
+	    vertical-align: middle;
+	  }
+	</style>
+</html>
